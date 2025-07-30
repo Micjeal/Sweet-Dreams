@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sweet Dreams Bakery - Artisan Cakes & Desserts</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="/placeholder.svg?height=32&width=32">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loading-screen">
+        <div class="loading-content">
+            <div class="loading-logo">
+                <img src="images/Hungry Happenings.jpeg" alt="Sweet Dreams Bakery">
+            </div>
+            <div class="loading-text">Sweet Dreams Bakery</div>
+            <div class="loading-spinner"></div>
+        </div>
+    </div>
+
+    <!-- Scroll Progress Bar -->
+    <div class="scroll-progress"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="images/Hungry Happenings.jpeg" alt="Sweet Dreams Bakery">
+                <span>Sweet Dreams</span>
+            </div>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#cakes" class="nav-link">Our Cakes</a></li>
+                <li><a href="#process" class="nav-link">Process</a></li>
+                <li><a href="#gallery" class="nav-link">Gallery</a></li>
+                <li><a href="#services" class="nav-link">Services</a></li>
+                <li><a href="#testimonials" class="nav-link">Reviews</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+                <span class="sun-icon">☀️</span>
+                <span class="moon-icon">🌙</span>
+            </button>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>Crafting Sweet Dreams Since 1995</h1>
+                <p>Indulge in our handcrafted cakes made with love, premium ingredients, and decades of baking expertise.</p>
+                <button class="cta-button" id="order-btn">Order Now</button>
+            </div>
+            <div class="hero-image">
+                <img src="images/Hungry Happenings.jpeg" alt="Beautiful layered cake">
+            </div>
+        </div>
+    </section>
+
+    <!-- About Us Section (Image Left, Text Right)-->
+    <section id="about" class="zigzag-section left-image">
+        <div class="section-container">
+            <div class="section-image">
+                <img src="/placeholder.svg?height=400&width=500" alt="Our bakery interior">
+            </div>
+            <div class="section-content">
+                <h2>Our Sweet Story</h2>
+                <p>Founded by Maria Rodriguez in 1995, Sweet Dreams Bakery began as a small family business with a simple mission: to create the most delicious, beautiful cakes that bring joy to life's special moments.</p>
+                <p>Today, we continue that tradition with the same passion and attention to detail, using only the finest ingredients and time-honored techniques passed down through generations.</p>
+                <div class="stats">
+                    <div class="stat">
+                        <span class="stat-number">10,000+</span>
+                        <span class="stat-label">Happy Customers</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">28</span>
+                        <span class="stat-label">Years Experience</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Cakes Section (Image Right, Text Left) -->
+    <section id="cakes" class="zigzag-section right-image">
+        <div class="section-container">
+            <div class="section-content">
+                <h2>Our Signature Cakes</h2>
+                <p>Each cake is a masterpiece, carefully crafted to perfection with premium ingredients and artistic flair.</p>
+                <div class="cake-grid">
+                    <div class="cake-item">
+                        <h3>Chocolate Decadence</h3>
+                        <p>Rich chocolate layers with Belgian ganache</p>
+                        <span class="price">$45</span>
+                    </div>
+                    <div class="cake-item">
+                        <h3>Vanilla Berry Bliss</h3>
+                        <p>Light vanilla sponge with fresh berries</p>
+                        <span class="price">$38</span>
+                    </div>
+                    <div class="cake-item">
+                        <h3>Red Velvet Classic</h3>
+                        <p>Traditional red velvet with cream cheese frosting</p>
+                        <span class="price">$42</span>
+                    </div>
+                    <div class="cake-item">
+                        <h3>Lemon Sunshine</h3>
+                        <p>Zesty lemon cake with buttercream</p>
+                        <span class="price">$40</span>
+                    </div>
+                </div>
+            </div>
+            <div class="section-image">
+                <img src="images/Hungry Happenings.jpeg" alt="Our cake display">
+            </div>
+        </div>
+    </section>
+
+    <!-- Baking Process Section (Image Left, Text Right)-->
+    <section id="process" class="zigzag-section left-image">
+        <div class="section-container">
+            <div class="section-image">
+                <img src="images/Hungry Happenings.jpeg" alt="Baking process">
+            </div>
+            <div class="section-content">
+                <h2>Our Baking Process</h2>
+                <p>Every cake follows our time-tested process to ensure perfection in every bite.</p>
+                <div class="process-steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h4>Premium Ingredients</h4>
+                            <p>We source only the finest ingredients from trusted suppliers</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h4>Expert Mixing</h4>
+                            <p>Our master bakers carefully blend each ingredient to perfection</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h4>Artisan Decoration</h4>
+                            <p>Each cake is hand-decorated with artistic precision</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section (Image Right, Text Left) -->
+    <section id="gallery" class="zigzag-section right-image">
+        <div class="section-container">
+            <div class="section-content">
+                <h2>Our Sweet Gallery</h2>
+                <p>Take a peek at our beautiful creations and the magic that happens in our kitchen every day.</p>
+            <div class="gallery-grid" id="gallery-grid">
+                <div class="gallery-item" data-category="wedding">
+                    <img src="images/Hungry Happenings.jpeg" alt="Wedding cake">
+                    <div class="gallery-overlay">
+                        <h4>Wedding Elegance</h4>
+                        <p>Custom wedding cake</p>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="birthday">
+                    <img src="images/Hungry Happenings.jpeg" alt="Birthday cake">
+                    <div class="gallery-overlay">
+                        <h4>Birthday Joy</h4>
+                        <p>Colorful birthday celebration</p>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="custom">
+                    <img src="images/Hungry Happenings.jpeg" alt="Custom cake">
+                    <div class="gallery-overlay">
+                        <h4>Custom Creation</h4>
+                        <p>Unique design cake</p>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="cupcakes">
+                    <img src="images/Hungry Happenings.jpeg" alt="Cupcakes">
+                    <div class="gallery-overlay">
+                        <h4>Sweet Cupcakes</h4>
+                        <p>Assorted flavors</p>
+                    </div>
+                </div>
+            </div>
+            <div class="gallery-filters">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="wedding">Wedding</button>
+                <button class="filter-btn" data-filter="birthday">Birthday</button>
+                <button class="filter-btn" data-filter="custom">Custom</button>
+                <button class="filter-btn" data-filter="cupcakes">Cupcakes</button>
+            </div>
+        </div>
+        <div class="section-image">
+            <img src="images/Hungry Happenings.jpeg" alt="Our beautiful bakery">
+        </div>
+    </div>
+</section>
+
+    <!-- Services Section (Image Left, Text Right)-->
+    <section id="services" class="zigzag-section left-image">
+        <div class="section-container">
+            <div class="section-image">
+                <img src="images/Hungry Happenings.jpeg" alt="Cake decorating service">
+            </div>
+            <div class="section-content">
+                <h2>Our Services</h2>
+                <p>From intimate gatherings to grand celebrations, we provide comprehensive baking services tailored to your needs.</p>
+                <div class="services-grid">
+                    <div class="service-card">
+                        <div class="service-icon">🎂</div>
+                        <h4>Custom Cakes</h4>
+                        <p>Personalized designs for any occasion</p>
+                        <ul>
+                            <li>Wedding cakes</li>
+                            <li>Birthday cakes</li>
+                            <li>Anniversary cakes</li>
+                        </ul>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">🧁</div>
+                        <h4>Cupcakes & Treats</h4>
+                        <p>Delicious individual portions</p>
+                        <ul>
+                            <li>Gourmet cupcakes</li>
+                            <li>Cake pops</li>
+                            <li>Mini desserts</li>
+                        </ul>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">🎪</div>
+                        <h4>Event Catering</h4>
+                        <p>Complete dessert solutions</p>
+                        <ul>
+                            <li>Corporate events</li>
+                            <li>Private parties</li>
+                            <li>Dessert tables</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section (Image Right, Text Left) -->
+    <section id="testimonials" class="zigzag-section right-image">
+        <div class="section-container">
+            <div class="section-content">
+                <h2>What Our Customers Say</h2>
+                <div class="testimonials-grid">
+                    <div class="testimonial">
+                        <div class="stars">★★★★★</div>
+                        <p>"The most beautiful and delicious wedding cake! Maria and her team exceeded all our expectations."</p>
+                        <div class="author">- Sarah & Mike Johnson</div>
+                    </div>
+                    <div class="testimonial">
+                        <div class="stars">★★★★★</div>
+                        <p>"I've been ordering birthday cakes here for 5 years. Always fresh, always perfect!"</p>
+                        <div class="author">- Jennifer Martinez</div>
+                    </div>
+                    <div class="testimonial">
+                        <div class="stars">★★★★★</div>
+                        <p>"The chocolate decadence cake is absolutely divine. Worth every penny!"</p>
+                        <div class="author">- Robert Chen</div>
+                    </div>
+                </div>
+            </div>
+            <div class="section-image">
+                <img src="images/Hungry Happenings.jpeg" alt="Happy customers">
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section (Image Left, Text Right)-->
+    <section id="contact" class="zigzag-section left-image">
+        <div class="section-container">
+            <div class="section-image">
+                <img src="images/Hungry Happenings.jpeg" alt="Our bakery location">
+            </div>
+            <div class="section-content">
+                <h2>Get In Touch</h2>
+                <p>Ready to order your perfect cake? Contact us today!</p>
+                <form class="contact-form" id="contact-form">
+                    <div class="form-group">
+                        <input type="text" id="name" name="name" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="email" name="email" placeholder="Your Email" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea id="message" name="message" placeholder="Tell us about your dream cake..." rows="4" required></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">Send Message</button>
+                </form>
+                <div class="contact-info">
+                    <div class="info-item">
+                        <strong>Address:</strong> 123 Sweet Street, Bakery District, BD 12345
+                    </div>
+                    <div class="info-item">
+                        <strong>Phone:</strong> (555) 123-CAKE
+                    </div>
+                    <div class="info-item">
+                        <strong>Hours:</strong> Mon-Sat 7AM-8PM, Sun 8AM-6PM
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Sweet Dreams Bakery</h3>
+                <p>Crafting sweet memories since 1995</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#cakes">Cakes</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Follow Us</h4>
+                <div class="social-links">
+                    <a href="#">Facebook</a>
+                    <a href="#">Instagram</a>
+                    <a href="#">Twitter</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Sweet Dreams Bakery. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="back-to-top">↑</button>
+
+    <!-- Order Modal -->
+    <div class="modal" id="order-modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Order Your Dream Cake</h2>
+            <form class="order-form">
+                <div class="form-group">
+                    <label for="cake-type">Cake Type:</label>
+                    <select id="cake-type" name="cake-type" required>
+                        <option value="">Select a cake</option>
+                        <option value="chocolate">Chocolate Decadence - $45</option>
+                        <option value="vanilla">Vanilla Berry Bliss - $38</option>
+                        <option value="red-velvet">Red Velvet Classic - $42</option>
+                        <option value="lemon">Lemon Sunshine - $40</option>
+                        <option value="custom">Custom Design</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="size">Size:</label>
+                    <select id="size" name="size" required>
+                        <option value="">Select size</option>
+                        <option value="small">Small (6 inch) - Serves 6-8</option>
+                        <option value="medium">Medium (8 inch) - Serves 10-12</option>
+                        <option value="large">Large (10 inch) - Serves 15-20</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="date">Pickup Date:</label>
+                    <input type="date" id="date" name="date" required>
+                </div>
+                <div class="form-group">
+                    <label for="special-requests">Special Requests:</label>
+                    <textarea id="special-requests" name="special-requests" rows="3" placeholder="Any special decorations or messages?"></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Place Order</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="assets/js/script.js"></script>
+</body>
+</html>
