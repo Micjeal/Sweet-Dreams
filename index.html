@@ -359,7 +359,22 @@
         <div class="modal-content">
             <span class="close">&times;</span>
             <h2>Order Your Dream Cake</h2>
-            <form class="order-form">
+            <form class="order-form" id="order-form">
+                <!-- Contact Information -->
+                <div class="form-group">
+                    <label for="customer-name">Your Name:</label>
+                    <input type="text" id="customer-name" name="customer-name" required minlength="2" placeholder="John Doe">
+                </div>
+                <div class="form-group">
+                    <label for="customer-email">Email:</label>
+                    <input type="email" id="customer-email" name="customer-email" required placeholder="your@email.com">
+                </div>
+                <div class="form-group">
+                    <label for="customer-phone">Phone:</label>
+                    <input type="tel" id="customer-phone" name="customer-phone" required placeholder="(123) 456-7890">
+                </div>
+
+                <!-- Order Details -->
                 <div class="form-group">
                     <label for="cake-type">Cake Type:</label>
                     <select id="cake-type" name="cake-type" required>
@@ -382,11 +397,15 @@
                 </div>
                 <div class="form-group">
                     <label for="date">Pickup Date:</label>
-                    <input type="date" id="date" name="date" required>
+                    <input type="date" id="date" name="date" required min="">
                 </div>
                 <div class="form-group">
                     <label for="special-requests">Special Requests:</label>
-                    <textarea id="special-requests" name="special-requests" rows="3" placeholder="Any special decorations or messages?"></textarea>
+                    <textarea id="special-requests" name="special-requests" rows="3" placeholder="Any special decorations, dietary restrictions, or messages?"></textarea>
+                </div>
+                <div class="form-group">
+                    <input type="checkbox" id="terms" name="terms" required>
+                    <label for="terms" class="checkbox-label">I agree to the <a href="#" class="terms-link">Terms and Conditions</a></label>
                 </div>
                 <button type="submit" class="submit-btn">Place Order</button>
             </form>

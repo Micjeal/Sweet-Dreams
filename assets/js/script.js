@@ -249,20 +249,32 @@ contactForm.addEventListener("submit", (e) => {
 })
 
 // Order form submission
-document.querySelector(".order-form").addEventListener("submit", (e) => {
+document.querySelector("#order-form").addEventListener("submit", async (e) => {
   e.preventDefault()
   
   // Get form data
-  const formData = new FormData(e.target)
-  const orderDetails = {
-    name: formData.get("name"),
-    phone: formData.get("phone"),
-    email: formData.get("email"),
-    cakeType: formData.get("cake-type"),
-    size: formData.get("size"),
-    date: formData.get("date"),
-    message: formData.get("message") || "No additional message"
+  const form = e.target;
+  const formData = new FormData(form);
+  
+  // Basic form validation
+  const cakeType = formData.get("cake-type");
+  const size = formData.get("size");
+  const date = formData.get("date");
+  const specialRequests = formData.get("special-requests") || "No special requests";
+  
+  // Validate required fields
+  if (!cakeType || !size || !date) {
+    showNotification("Please fill in all required fields.", "error");
+    return;
   }
+  
+  // Format the order details
+  const orderDetails = {
+    cakeType: cakeType,
+    size: size,
+    date: date,
+    specialRequests: specialRequests
+  };
   
   // Show loading state
   const submitBtn = e.target.querySelector('button[type="submit"]')
@@ -270,40 +282,60 @@ document.querySelector(".order-form").addEventListener("submit", (e) => {
   submitBtn.textContent = "Placing Order..."
   submitBtn.disabled = true
   
-  // Initialize EmailJS (you'll need to sign up at https://www.emailjs.com/)
-  ;(function() {
-    emailjs.init("rP3ZNOQoc9XsK7XLA") // Replace with your EmailJS public key
-  })()
-  
-  // Send email
-  emailjs.send('SWEET DREAMS BAKERY', 'template_u1nuxye', {
-    to_email: 'micknick168@gmail.com',
-    from_name: orderDetails.name,
-    from_email: orderDetails.email,
-    phone: orderDetails.phone,
-    subject: `New Cake Order: ${orderDetails.cakeType}`,
-    message: `New order details:\n\n` +
-             `Name: ${orderDetails.name}\n` +
-             `Email: ${orderDetails.email}\n` +
-             `Phone: ${orderDetails.phone}\n` +
-             `Cake Type: ${orderDetails.cakeType}\n` +
-             `Size: ${orderDetails.size}\n` +
-             `Date Needed: ${orderDetails.date}\n` +
-             `Additional Message: ${orderDetails.message}`
-  })
-  .then(function(response) {
-    showNotification("Order placed successfully! We'll contact you to confirm details.", "success")
-    orderModal.style.display = "none"
-    document.body.style.overflow = "auto"
-    e.target.reset()
-  }, function(error) {
+  try {
+    // Initialize EmailJS with your public key
+    await emailjs.init("rP3ZNOQoc9XsK7XLA");
+    
+    // Get customer details from the form
+    const customerName = formData.get('customer-name') || 'Customer';
+    const customerEmail = formData.get('customer-email') || 'no-reply@example.com';
+    const customerPhone = formData.get('customer-phone') || 'Not provided';
+    
+    // Prepare email parameters according to your EmailJS template
+    const templateParams = {
+      to: 'micknick168@gmail.com',  // Direct recipient
+      from_name: customerName || 'Website Customer',
+      from_email: customerEmail || 'noreply@sweetdreamsbakery.com',
+      reply_to: customerEmail || 'noreply@sweetdreamsbakery.com',
+      subject: `New Cake Order: ${cakeType}`,
+      message: `
+        <h2>New Cake Order</h2>
+        <p><strong>Customer Name:</strong> ${customerName || 'Not provided'}</p>
+        <p><strong>Email:</strong> ${customerEmail || 'Not provided'}</p>
+        <p><strong>Phone:</strong> ${customerPhone || 'Not provided'}</p>
+        <p><strong>Cake Type:</strong> ${cakeType || 'Not specified'}</p>
+        <p><strong>Size:</strong> ${size || 'Not specified'}</p>
+        <p><strong>Pickup Date:</strong> ${date || 'Not specified'}</p>
+        <p><strong>Special Requests:</strong> ${specialRequests || 'None'}</p>
+      `
+    };
+    
+    // Send email using EmailJS
+    const response = await emailjs.send(
+      'default_service',
+      'template_u1nuxye',
+      templateParams,
+      'rP3ZNOQoc9XsK7XLA'  // User ID as the fourth parameter
+    )
+    
+    if (response.status === 200) {
+      showNotification("Order placed successfully! We'll contact you to confirm details.", "success")
+      const orderModal = document.getElementById("order-modal")
+      if (orderModal) {
+        orderModal.style.display = "none"
+        document.body.style.overflow = "auto"
+      }
+      e.target.reset()
+    } else {
+      throw new Error('Failed to send email')
+    }
+  } catch (error) {
     console.error('Email sending failed:', error)
     showNotification("Failed to send order. Please try again or contact us directly.", "error")
-  })
-  .finally(() => {
+  } finally {
     submitBtn.textContent = originalText
     submitBtn.disabled = false
-  })
+  }
 })
 
 // Advanced Form Handling with Validation
@@ -312,19 +344,55 @@ function validateEmail(email) {
   return re.test(email)
 }
 
+function validatePhone(phone) {
+  const re = /^[+]?[(]?[0-9]{3}[)]?[-\s.]?[0-9]{3}[-\s.]?[0-9]{4,6}$/
+  return re.test(phone)
+}
+
 function validateForm(formData) {
   const errors = []
-
-  if (!formData.get("name") || formData.get("name").trim().length < 2) {
-    errors.push("Name must be at least 2 characters long")
+  
+  // Contact Information Validation
+  const name = formData.get("customer-name")?.trim()
+  const email = formData.get("customer-email")?.trim()
+  const phone = formData.get("customer-phone")?.trim()
+  
+  if (!name || name.length < 2) {
+    errors.push("Please enter your full name (at least 2 characters)")
   }
-
-  if (!validateEmail(formData.get("email"))) {
+  
+  if (!email || !validateEmail(email)) {
     errors.push("Please enter a valid email address")
   }
-
-  if (!formData.get("message") || formData.get("message").trim().length < 10) {
-    errors.push("Message must be at least 10 characters long")
+  
+  if (!phone || !validatePhone(phone)) {
+    errors.push("Please enter a valid phone number")
+  }
+  
+  // Order Details Validation
+  if (!formData.get("cake-type")) {
+    errors.push("Please select a cake type")
+  }
+  
+  if (!formData.get("size")) {
+    errors.push("Please select a size")
+  }
+  
+  const pickupDate = formData.get("date")
+  if (!pickupDate) {
+    errors.push("Please select a pickup date")
+  } else {
+    const today = new Date()
+    const selectedDate = new Date(pickupDate)
+    // Ensure the date is not in the past
+    if (selectedDate < today) {
+      errors.push("Please select a future date for pickup")
+    }
+  }
+  
+  // Terms and Conditions
+  if (!formData.get("terms")) {
+    errors.push("You must agree to the terms and conditions")
   }
 
   return errors
@@ -335,7 +403,20 @@ contactForm.addEventListener("submit", (e) => {
   e.preventDefault()
 
   const formData = new FormData(contactForm)
-  const errors = validateForm(formData)
+  const errors = []
+  
+  // Check required fields for the order form
+  if (!formData.get("cake-type")) {
+    errors.push("Please select a cake type")
+  }
+  
+  if (!formData.get("size")) {
+    errors.push("Please select a size")
+  }
+  
+  if (!formData.get("date")) {
+    errors.push("Please select a pickup date")
+  }
 
   if (errors.length > 0) {
     showNotification(errors.join(". "), "error")
@@ -343,14 +424,15 @@ contactForm.addEventListener("submit", (e) => {
   }
 
   // Show loading state
-  const submitBtn = contactForm.querySelector(".submit-btn")
+  const submitBtn = contactForm.querySelector("button[type='submit']")
   const originalText = submitBtn.textContent
-  submitBtn.textContent = "Sending..."
+  submitBtn.textContent = "Placing Order..."
   submitBtn.disabled = true
 
-  // Simulate API call
+  // The actual form submission is handled by the order form event listener
+  // This is just a fallback
   setTimeout(() => {
-    showNotification("Thank you for your message! We'll get back to you within 24 hours.", "success")
+    showNotification("Thank you for your order! We'll prepare your cake as requested.", "success")
     contactForm.reset()
     submitBtn.textContent = originalText
     submitBtn.disabled = false
