@@ -251,18 +251,59 @@ contactForm.addEventListener("submit", (e) => {
 // Order form submission
 document.querySelector(".order-form").addEventListener("submit", (e) => {
   e.preventDefault()
-
+  
   // Get form data
   const formData = new FormData(e.target)
-  const cakeType = formData.get("cake-type")
-  const size = formData.get("size")
-  const date = formData.get("date")
-
-  // Simulate order submission
-  showNotification("Order placed successfully! We'll contact you to confirm details.", "success")
-  orderModal.style.display = "none"
-  document.body.style.overflow = "auto"
-  e.target.reset()
+  const orderDetails = {
+    name: formData.get("name"),
+    phone: formData.get("phone"),
+    email: formData.get("email"),
+    cakeType: formData.get("cake-type"),
+    size: formData.get("size"),
+    date: formData.get("date"),
+    message: formData.get("message") || "No additional message"
+  }
+  
+  // Show loading state
+  const submitBtn = e.target.querySelector('button[type="submit"]')
+  const originalText = submitBtn.textContent
+  submitBtn.textContent = "Placing Order..."
+  submitBtn.disabled = true
+  
+  // Initialize EmailJS (you'll need to sign up at https://www.emailjs.com/)
+  ;(function() {
+    emailjs.init("rP3ZNOQoc9XsK7XLA") // Replace with your EmailJS public key
+  })()
+  
+  // Send email
+  emailjs.send('SWEET DREAMS BAKERY', 'template_u1nuxye', {
+    to_email: 'micknick168@gmail.com',
+    from_name: orderDetails.name,
+    from_email: orderDetails.email,
+    phone: orderDetails.phone,
+    subject: `New Cake Order: ${orderDetails.cakeType}`,
+    message: `New order details:\n\n` +
+             `Name: ${orderDetails.name}\n` +
+             `Email: ${orderDetails.email}\n` +
+             `Phone: ${orderDetails.phone}\n` +
+             `Cake Type: ${orderDetails.cakeType}\n` +
+             `Size: ${orderDetails.size}\n` +
+             `Date Needed: ${orderDetails.date}\n` +
+             `Additional Message: ${orderDetails.message}`
+  })
+  .then(function(response) {
+    showNotification("Order placed successfully! We'll contact you to confirm details.", "success")
+    orderModal.style.display = "none"
+    document.body.style.overflow = "auto"
+    e.target.reset()
+  }, function(error) {
+    console.error('Email sending failed:', error)
+    showNotification("Failed to send order. Please try again or contact us directly.", "error")
+  })
+  .finally(() => {
+    submitBtn.textContent = originalText
+    submitBtn.disabled = false
+  })
 })
 
 // Advanced Form Handling with Validation
